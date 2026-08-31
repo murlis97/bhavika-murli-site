@@ -5,29 +5,31 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self'; connect-src 'self' https://script.google.com https://script.googleusercontent.com; img-src 'self'; frame-ancestors 'none';">
-<title>Bhavika & Murli · RSVP</title>
+<title>RSVP · Bhavika & Murli Wedding</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Great+Vibes&family=Noto+Serif+Devanagari:wght@400;500;600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="twinkle-diyas" aria-hidden="true">
-  <span class="diya">🪔</span>
-  <span class="diya">🪔</span>
-  <span class="diya">🪔</span>
-  <span class="diya">🪔</span>
-  <span class="diya">🪔</span>
-  <span class="diya">🪔</span>
-  <span class="diya">🪔</span>
+  <div class="twinkle-inner">
+    <span class="diya">🪔</span>
+    <span class="diya">🪔</span>
+    <span class="diya">🪔</span>
+    <span class="diya">🪔</span>
+    <span class="diya">🪔</span>
+    <span class="diya">🪔</span>
+    <span class="diya">🪔</span>
+  </div>
 </div>
 
 <main class="rsvp-main">
   <div class="arch-card rsvp-card">
     <img class="crest" src="images/ganesha-crest.png" alt="Ganesha">
 
-    <p class="eyebrow">Kindly respond by November 1</p>
+    <p class="eyebrow">Kindly respond by October 15, 2026</p>
     <h1 class="names small">RSVP</h1>
 
     <form id="rsvp-form" class="rsvp-form">
@@ -40,7 +42,7 @@
       </div>
 
       <label for="full-name">Full name</label>
-      <input type="text" id="full-name" name="fullName" required placeholder="Jane Doe">
+      <input type="text" id="full-name" name="fullName" required placeholder="Pavitra Prabhakar">
 
       <fieldset class="attend-fieldset">
         <legend>Will you be attending?</legend>
@@ -57,30 +59,32 @@
       </fieldset>
 
       <label for="guest-count">Number attending (including you)</label>
-      <select id="guest-count" name="guestCount">
+      <select id="guest-count" name="guestCount" required>
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
       </select>
+
+      <div id="guest-names-wrap" hidden>
+        <p class="label">Names of guests</p>
+        <div id="guest-names-list" class="guest-names-list"></div>
+      </div>
 
       <label for="events">Which events will you join?</label>
       <div class="checkbox-col">
-        <label class="checkbox-row"><input type="checkbox" name="events" value="Haldi"> Haldi — Nov 24</label>
-        <label class="checkbox-row"><input type="checkbox" name="events" value="Sangeet"> Sangeet Night — Nov 24</label>
-        <label class="checkbox-row"><input type="checkbox" name="events" value="Baraat & Ceremony"> Baraat &amp; Wedding Ceremony — Nov 25</label>
+        <label class="checkbox-row"><input type="checkbox" name="events" value="Haldi"> Haldi — Nov 24, 1 PM</label>
+        <label class="checkbox-row"><input type="checkbox" name="events" value="Sangeet"> Sangeet Night — Nov 24, 6 PM</label>
+        <label class="checkbox-row"><input type="checkbox" name="events" value="Baraat & Ceremony"> Baraat &amp; Wedding Ceremony — Nov 25, 1 PM</label>
       </div>
 
       <label for="meal">Meal preference</label>
-      <select id="meal" name="meal">
+      <select id="meal" name="meal" required>
         <option value="Vegetarian">Vegetarian</option>
         <option value="Vegan">Vegan</option>
-        <option value="Non-Vegetarian">Non-Vegetarian</option>
         <option value="No Preference">No Preference</option>
       </select>
 
-      <label for="message">Message for the couple (optional)</label>
+      <label for="message">Message for the couple (or dedicate a song to us :P )</label>
       <textarea id="message" name="message" rows="3" placeholder="Leave a note..."></textarea>
 
       <button type="submit" class="cta submit-btn">Send RSVP</button>
@@ -91,14 +95,13 @@
 
 <footer>
   <p class="footer-mark">B &amp; M</p>
-  <p class="footer-blessing">॥ शुभ॥ ॥ लाभ॥</p>
   <div class="footer-meta">
     <p class="footer-date">Wednesday, November 25, 2026</p>
     <p class="footer-location">Vista, CA</p>
   </div>
   <img class="footer-om" src="images/om-icon.png" alt="Om symbol">
   <p class="footer-links"><a href="index.html">Invitation</a> &middot; <a href="story.html">Our Story</a> &middot; <a href="venue.html">Venue &amp; Travel</a></p>
-  <p class="footer-credit">Made by Murli for Bhavika with &lt;3</p>
+  <p class="footer-credit">Made by Murli for Bhavika with ❤️</p>
 </footer>
 
 <script src="script.js"></script>
