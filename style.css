@@ -128,7 +128,7 @@ html { scroll-snap-type: y proximity; }
   border: 1px solid var(--gold);
   /* responsive padding: reduce on small screens but allow expansion on large */
   padding: clamp(28px, 4.5vw, 56px) clamp(18px, 3.5vw, 36px) clamp(20px, 4vw, 44px);
-  box-shadow: 0 24px 50px rgba(70,66,44,0.14);
+  box-shadow: 0 24px 50px rgba(70,66,44,0.14), 0 8px 24px rgba(169,128,31,0.15);
   max-width: 680px;
   margin: 0 auto;
 }
@@ -194,7 +194,7 @@ html { scroll-snap-type: y proximity; }
 }
 .names .name-details {
   margin-top: 6px;
-  font-size: clamp(11px, 1.9vw, 14px);
+  font-size: clamp(13.2px, 2.28vw, 16.8px);
   font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: none;
@@ -237,7 +237,7 @@ html { scroll-snap-type: y proximity; }
 .tagline {
   font-family: var(--font-display);
   font-style: italic;
-  font-size: 20px;
+  font-size: clamp(14px, 2.2vw, 18px);
   color: var(--ink);
   margin: 30px 0;
 }
