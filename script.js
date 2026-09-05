@@ -58,6 +58,7 @@ const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz5gYQFgpkYHS9-
 
   const lockedEl = document.getElementById('access-locked');
   const rsvpCta = document.getElementById('events-rsvp-cta');
+  const rsvpLink = document.getElementById('events-rsvp-link');
   const details = wrap.querySelectorAll('.event-detail');
 
   if (!validTiers.includes(access)) {
@@ -68,6 +69,13 @@ const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz5gYQFgpkYHS9-
   }
 
   if (rsvpCta) rsvpCta.hidden = false;
+  if (rsvpLink) {
+    const rsvpUrl = new URL('RSVP.html', window.location.href);
+    rsvpUrl.searchParams.set('access', access);
+    const code = params.get('code');
+    if (code) rsvpUrl.searchParams.set('code', code);
+    rsvpLink.href = rsvpUrl.href;
+  }
 
   details.forEach(el => {
     const tiers = (el.dataset.tier || '').split(',').map(t => t.trim());
@@ -82,9 +90,28 @@ const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz5gYQFgpkYHS9-
   const form = document.getElementById('rsvp-form');
   if (!form) return;
 
-  // Prefill the guest code from the URL, e.g. RSVP.html?code=MI-SANGEET
   const params = new URLSearchParams(window.location.search);
   const code = params.get('code') || '';
+  const validTiers = ['all', 'sangeet', 'wedding'];
+  const accessParam = (params.get('access') || '').toLowerCase().trim();
+  const codeParam = code.toLowerCase().trim();
+  const access = validTiers.includes(accessParam)
+    ? accessParam
+    : (validTiers.includes(codeParam) ? codeParam : '');
+  const eventOptions = form.querySelectorAll('#event-options [data-tier]');
+  const allowedEvents = new Set();
+
+  eventOptions.forEach(option => {
+    const tiers = (option.dataset.tier || '').split(',').map(tier => tier.trim());
+    const isAllowed = validTiers.includes(access) && tiers.includes(access);
+    option.hidden = !isAllowed;
+    const input = option.querySelector('input[name="events"]');
+    if (input) {
+      input.disabled = !isAllowed;
+      if (isAllowed) allowedEvents.add(input.value);
+    }
+  });
+
   document.getElementById('guest-code').value = code;
   
     const guestCountEl = form.querySelector('#guest-count');
@@ -168,9 +195,16 @@ const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz5gYQFgpkYHS9-
       }
     
       // Require at least one event to be selected
-      const eventsChecked = form.querySelectorAll('input[name="events"]:checked').length;
+      const selectedEvents = Array.from(form.querySelectorAll('input[name="events"]:checked'));
+      const eventsChecked = selectedEvents.filter(input => allowedEvents.has(input.value)).length;
       if (eventsChecked === 0) {
         statusEl.textContent = 'Please select at least one event you will join.';
+        statusEl.classList.add('error');
+        return;
+      }
+
+      if (selectedEvents.some(input => !allowedEvents.has(input.value))) {
+        statusEl.textContent = 'Please select only the events available on your invitation.';
         statusEl.classList.add('error');
         return;
       }
