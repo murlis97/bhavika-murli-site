@@ -98,6 +98,15 @@ const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz5gYQFgpkYHS9-
   const access = validTiers.includes(accessParam)
     ? accessParam
     : (validTiers.includes(codeParam) ? codeParam : '');
+  const rsvpCard = document.getElementById('rsvp-card');
+  const rsvpLocked = document.getElementById('rsvp-access-locked');
+
+  if (!validTiers.includes(access)) {
+    if (rsvpCard) rsvpCard.hidden = true;
+    if (rsvpLocked) rsvpLocked.hidden = false;
+    return;
+  }
+
   const eventOptions = form.querySelectorAll('#event-options [data-tier]');
   const allowedEvents = new Set();
 
