@@ -26,7 +26,12 @@
 </div>
 
 <main class="rsvp-main">
-  <div class="arch-card rsvp-card">
+  <div id="rsvp-access-locked" class="access-locked" hidden>
+    <span class="lock-icon">🔒</span>
+    <p>This RSVP form is shared privately through each guest's personal invite link. Please use the RSVP button on your event details page.</p>
+  </div>
+
+  <div class="arch-card rsvp-card" id="rsvp-card">
     <img class="crest" src="images/ganesha-crest.png" alt="Ganesha">
 
     <p class="eyebrow">Kindly respond by October 15, 2026</p>
@@ -71,10 +76,10 @@
       </div>
 
       <label for="events">Which events will you join?</label>
-      <div class="checkbox-col">
-        <label class="checkbox-row"><input type="checkbox" name="events" value="Haldi"> Haldi — Nov 24, 1 PM</label>
-        <label class="checkbox-row"><input type="checkbox" name="events" value="Sangeet"> Sangeet Night — Nov 24, 6 PM</label>
-        <label class="checkbox-row"><input type="checkbox" name="events" value="Baraat & Ceremony"> Baraat &amp; Wedding Ceremony — Nov 25, 1 PM</label>
+      <div class="checkbox-col" id="event-options">
+        <label class="checkbox-row" data-tier="all"><input type="checkbox" name="events" value="Haldi"> Haldi — Nov 24, 1 PM</label>
+        <label class="checkbox-row" data-tier="all,sangeet"><input type="checkbox" name="events" value="Sangeet"> Sangeet Night — Nov 24, 6 PM</label>
+        <label class="checkbox-row" data-tier="all,sangeet,wedding"><input type="checkbox" name="events" value="Baraat & Ceremony"> Baraat &amp; Wedding Ceremony — Nov 25, 1 PM</label>
       </div>
 
       <label for="message">Message for the couple (or dedicate a song to us :P )</label>
@@ -85,7 +90,7 @@
     </form>
 
     <div class="ps-note" style="margin-top: 32px; padding-top: 32px; border-top: 1px solid var(--line);">
-      <p><span class="ps-label">P.S.</span> Please don't bring gifts, it's a destination wedding — just grace us with your presence. We look forward to celebrating with you!</p>
+      <p><span class="ps-label">P.S.</span> Please don't bring gifts; it's a destination wedding — just grace us with your presence. We look forward to celebrating with you!</p>
     </div>
   </div>
 </main>
