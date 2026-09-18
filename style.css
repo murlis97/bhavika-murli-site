@@ -270,6 +270,7 @@ html { scroll-snap-type: y proximity; }
   color: var(--gold-deep);
 }
 .cta-outline:hover { background: var(--gold); color: #FBF9F0; }
+.venue-map-link { display: block; width: fit-content; margin: 32px auto 0; }
 
 /* Helper: scale visual size by 25% for selected blocks (homepage use) */
 .scale-125 {
