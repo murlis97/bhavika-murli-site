@@ -8,7 +8,7 @@
 <title>RSVP · Bhavika & Murli Wedding</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Great+Vibes&family=Noto+Serif+Devanagari:wght@400;500;600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:wght@500;600;700&family=Great+Vibes&family=Noto+Serif+Devanagari:wght@400;500;600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -34,7 +34,7 @@
   <div class="arch-card rsvp-card" id="rsvp-card">
     <img class="crest" src="images/ganesha-crest.png" alt="Ganesha">
 
-    <p class="eyebrow">Kindly respond by October 15, 2026</p>
+    <p class="eyebrow">Kindly respond by October 25, 2026</p>
     <h1 class="names small">RSVP</h1>
 
     <form id="rsvp-form" class="rsvp-form">
@@ -77,26 +77,30 @@
 
       <label for="events">Which events will you join?</label>
       <div class="checkbox-col" id="event-options">
-        <label class="checkbox-row" data-tier="all"><input type="checkbox" name="events" value="Haldi"> Haldi — Nov 24, 1 PM</label>
-        <label class="checkbox-row" data-tier="all,sangeet"><input type="checkbox" name="events" value="Sangeet"> Sangeet Night — Nov 24, 6 PM</label>
-        <label class="checkbox-row" data-tier="all,sangeet,wedding"><input type="checkbox" name="events" value="Baraat & Ceremony"> Baraat &amp; Wedding Ceremony — Nov 25, 1 PM</label>
+        <label class="checkbox-row" data-tier="all" data-date="nov23"><input type="checkbox" name="events" value="Mehndi"> Mehndi — November 23 | 2:00 PM</label>
+        <label class="checkbox-row" data-tier="all" data-date="nov23"><input type="checkbox" name="events" value="Tilak"> Tilak — November 23 | 3:00 PM</label>
+        <label class="checkbox-row" data-tier="all,ganesh"><input type="checkbox" name="events" value="Ganesh Sthapna & Tel Bukki"> Ganesh Sthapna — November 24 | 8:00 AM</label>
+        <label class="checkbox-row" data-tier="all,ganesh"><input type="checkbox" name="events" value="Ganesh Pooja & Vansh Ropan"> Ganesh Pooja &amp; Vansh Ropan — November 24 | 9:00 AM</label>
+        <label class="checkbox-row" data-tier="all,haldi"><input type="checkbox" name="events" value="Haldi"> Haldi — November 24 | 2:00 PM</label>
+        <label class="checkbox-row" data-tier="all,sangeet,wedding"><input type="checkbox" name="events" value="Sangeet"> Sangeet — November 24 | 6:00 PM</label>
+        <label class="checkbox-row" data-tier="all,sangeet,wedding"><input type="checkbox" name="events" value="Baraat & Wedding Ceremony"> Baraat &amp; Wedding Ceremony — November 25 | 2:00 PM</label>
       </div>
 
       <label for="message">Message for the couple (or dedicate a song to us :P )</label>
       <textarea id="message" name="message" rows="3" placeholder="Leave a note..."></textarea>
 
-      <button type="submit" class="cta submit-btn">Send RSVP</button>
+      <button type="submit" class="cta submit-btn">Submit</button>
       <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
     </form>
 
     <div class="ps-note" style="margin-top: 32px; padding-top: 32px; border-top: 1px solid var(--line);">
-      <p><span class="ps-label">P.S.</span> Please don't bring gifts; it's a destination wedding — just grace us with your presence. We look forward to celebrating with you!</p>
+      <p><span class="ps-label">P.S.</span> Grace us with your presence. We look forward to celebrating with you!</p>
     </div>
   </div>
 </main>
 
 <footer>
-  <p class="footer-mark">B &amp; M</p>
+  <p class="footer-mark"><span class="footer-initials">B</span><span class="footer-amp">&amp;</span><span class="footer-initials">M</span></p>
   <div class="footer-meta">
     <p class="footer-date">Wednesday, November 25, 2026</p>
     <p class="footer-location">Vista, CA</p>
