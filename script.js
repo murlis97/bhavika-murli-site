@@ -4,6 +4,47 @@
    ========================================================= */
 const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz5gYQFgpkYHS9-ZCkw8ILJLQ_BUhCXdNC4Bp5uB70uBTSDn34mjUB344_suXLXguxj/exec";
 
+async function initGuestRedirectFromCsv() {
+  const params = new URLSearchParams(window.location.search);
+  const rawCode = (params.get('code') || '').trim();
+  if (!rawCode) return;
+
+  const code = rawCode.toUpperCase();
+  const currentUrl = new URL(window.location.href);
+
+  try {
+    const response = await fetch('guest-codes.csv');
+    if (!response.ok) return;
+
+    const text = await response.text();
+    const rows = text.split(/\r?\n/).filter(Boolean);
+    const header = rows.shift();
+    if (!header) return;
+
+    const match = rows.find(row => {
+      const [csvCode, ,] = row.split(',').map(part => part.trim());
+      return csvCode && csvCode.toUpperCase() === code;
+    });
+
+    if (!match) return;
+
+    const [, page, access] = match.split(',').map(part => part.trim());
+    if (!page || !access) return;
+
+    const targetUrl = new URL(`${page}?access=${encodeURIComponent(access)}`, currentUrl.href);
+    const alreadyAtTarget = currentUrl.pathname.endsWith(`/${page}`)
+      && currentUrl.searchParams.get('access') === access;
+
+    if (!alreadyAtTarget) {
+      window.location.replace(targetUrl.href);
+    }
+  } catch (error) {
+    console.warn('Guest redirect CSV could not be loaded:', error);
+  }
+}
+
+initGuestRedirectFromCsv();
+
 /* =========================================================
    Countdown timer (index.html)
    ========================================================= */
@@ -55,6 +96,14 @@ const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz5gYQFgpkYHS9-
   const params = new URLSearchParams(window.location.search);
   const access = (params.get('access') || '').toLowerCase().trim();
   const validTiers = ['all', 'sangeet', 'wedding'];
+  const isEventsPage = window.location.pathname.endsWith('/events.html');
+
+  if (isEventsPage && params.has('scope')) {
+    params.delete('scope');
+    const cleanUrl = new URL(window.location.href);
+    cleanUrl.searchParams.delete('scope');
+    window.history.replaceState(null, '', cleanUrl.href);
+  }
 
   const lockedEl = document.getElementById('access-locked');
   const rsvpCta = document.getElementById('events-rsvp-cta');
@@ -74,6 +123,10 @@ const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz5gYQFgpkYHS9-
     rsvpUrl.searchParams.set('access', access);
     const code = params.get('code');
     if (code) rsvpUrl.searchParams.set('code', code);
+    const scope = params.get('scope');
+    if (scope && !isEventsPage) rsvpUrl.searchParams.set('scope', scope);
+    const source = isEventsPage ? 'events' : params.get('source');
+    if (source) rsvpUrl.searchParams.set('source', source);
     rsvpLink.href = rsvpUrl.href;
   }
 
@@ -92,8 +145,10 @@ const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz5gYQFgpkYHS9-
 
   const params = new URLSearchParams(window.location.search);
   const code = params.get('code') || '';
-  const validTiers = ['all', 'sangeet', 'wedding'];
+  const validTiers = ['all', 'ganesh', 'haldi', 'sangeet', 'wedding'];
   const accessParam = (params.get('access') || '').toLowerCase().trim();
+  const scope = (params.get('scope') || '').toLowerCase().trim();
+  const source = (params.get('source') || '').toLowerCase().trim();
   const codeParam = code.toLowerCase().trim();
   const access = validTiers.includes(accessParam)
     ? accessParam
@@ -112,7 +167,12 @@ const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz5gYQFgpkYHS9-
 
   eventOptions.forEach(option => {
     const tiers = (option.dataset.tier || '').split(',').map(tier => tier.trim());
-    const isAllowed = validTiers.includes(access) && tiers.includes(access);
+    const isMehendiScope = scope === 'nov23' && source === 'mehendi';
+    const isEventsScope = source === 'events';
+    const isInScope = isMehendiScope
+      ? option.dataset.date === 'nov23'
+      : !isEventsScope || option.dataset.date !== 'nov23';
+    const isAllowed = validTiers.includes(access) && tiers.includes(access) && isInScope;
     option.hidden = !isAllowed;
     const input = option.querySelector('input[name="events"]');
     if (input) {
@@ -177,6 +237,27 @@ const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz5gYQFgpkYHS9-
 
   const statusEl = document.getElementById('form-status');
   const submitBtn = form.querySelector('.submit-btn');
+  const attendingInputs = form.querySelectorAll('input[name="attending"]');
+  const eventFieldset = form.querySelector('#event-options');
+
+  function setDeclineMode(isDecline) {
+    const eventInputs = form.querySelectorAll('input[name="events"]');
+    eventInputs.forEach(input => {
+      input.disabled = isDecline;
+      input.checked = false;
+    });
+
+    if (eventFieldset) {
+      eventFieldset.style.opacity = isDecline ? '0.55' : '1';
+      eventFieldset.style.pointerEvents = isDecline ? 'none' : 'auto';
+    }
+  }
+
+  attendingInputs.forEach(input => {
+    input.addEventListener('change', function () {
+      setDeclineMode(this.value === 'No');
+    });
+  });
 
   form.addEventListener('submit', async function (e) {
     e.preventDefault();
@@ -203,19 +284,28 @@ const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz5gYQFgpkYHS9-
         return;
       }
     
-      // Require at least one event to be selected
-      const selectedEvents = Array.from(form.querySelectorAll('input[name="events"]:checked'));
-      const eventsChecked = selectedEvents.filter(input => allowedEvents.has(input.value)).length;
-      if (eventsChecked === 0) {
-        statusEl.textContent = 'Please select at least one event you will join.';
-        statusEl.classList.add('error');
-        return;
-      }
+      const attendingSelection = form.querySelector('input[name="attending"]:checked');
+      if (attendingSelection && attendingSelection.value === 'No') {
+        const selectedEvents = Array.from(form.querySelectorAll('input[name="events"]:checked'));
+        if (selectedEvents.length > 0) {
+          statusEl.textContent = 'You can leave a message for the couple and submit without selecting any events.';
+          statusEl.classList.add('error');
+          return;
+        }
+      } else {
+        const selectedEvents = Array.from(form.querySelectorAll('input[name="events"]:checked'));
+        const eventsChecked = selectedEvents.filter(input => allowedEvents.has(input.value)).length;
+        if (eventsChecked === 0) {
+          statusEl.textContent = 'Please select at least one event you will join.';
+          statusEl.classList.add('error');
+          return;
+        }
 
-      if (selectedEvents.some(input => !allowedEvents.has(input.value))) {
-        statusEl.textContent = 'Please select only the events available on your invitation.';
-        statusEl.classList.add('error');
-        return;
+        if (selectedEvents.some(input => !allowedEvents.has(input.value))) {
+          statusEl.textContent = 'Please select only the events available on your invitation.';
+          statusEl.classList.add('error');
+          return;
+        }
       }
 
     const formData = new FormData(form);
