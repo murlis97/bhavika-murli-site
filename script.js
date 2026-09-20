@@ -46,6 +46,21 @@ async function initGuestRedirectFromCsv() {
 initGuestRedirectFromCsv();
 
 /* =========================================================
+   Invitation page schedule — show private events only for access=all
+   ========================================================= */
+(function initIndexSchedule() {
+  const eventList = document.querySelector('.event-list');
+  if (!eventList) return;
+
+  const access = new URLSearchParams(window.location.search).get('access');
+  if (access === 'all') {
+    eventList.querySelectorAll('[data-access-all-only]').forEach(event => {
+      event.hidden = false;
+    });
+  }
+})();
+
+/* =========================================================
    Countdown timer (index.html)
    ========================================================= */
 (function initCountdown() {
