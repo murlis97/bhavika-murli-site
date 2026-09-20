@@ -244,6 +244,7 @@ html { scroll-snap-type: y proximity; }
 
 .details { margin: 32px 0 8px; }
 .details .venue { margin: 0 0 6px; font-weight: 400; color: var(--ink); }
+.details .venue-note { margin-top: 12px; font-family: var(--font-display); font-size: 14px; font-style: italic; color: var(--gold-deep); opacity: 0.75; }
 .details .date { margin: 0; color: var(--gold-deep); font-weight: 500; letter-spacing: 0.5px; }
 
 .cta {
@@ -452,6 +453,7 @@ html { scroll-snap-type: y proximity; }
   color: var(--gold);
   margin: 0 0 10px;
 }
+.travel-card .hotel-address { margin: 0; font-size: 14px; color: var(--ink-soft); }
 .travel-card p:last-child { margin: 0; font-size: 14px; color: var(--ink-soft); }
 
 .venue-link { display: block; margin: 28px auto 0; width: fit-content; }
@@ -586,8 +588,9 @@ footer {
 
 .radio-row { display: flex; gap: 12px; flex-wrap: wrap; }
 .radio-pill {
-  flex: 1;
-  min-width: 140px;
+  flex: 1 1 220px;
+  min-width: 220px;
+  white-space: nowrap;
   display: flex;
   align-items: center;
   justify-content: center;
