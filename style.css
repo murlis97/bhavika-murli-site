@@ -538,6 +538,7 @@ footer {
    ============================================ */
 .rsvp-main { padding-top: 10px; }
 .rsvp-card { max-width: 520px; padding: 60px 36px 44px; border-radius: 220px 220px 24px 24px; }
+.rsvp-venue { width: 100%; max-width: 520px; margin: 64px auto 0; background: var(--panel); }
 
 .rsvp-form { text-align: left; margin-top: 24px; display: flex; flex-direction: column; gap: 6px; }
 
