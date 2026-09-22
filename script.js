@@ -516,11 +516,27 @@ initGuestRedirectFromCsv();
     try {
       const response = await fetch(APPS_SCRIPT_URL, {
         method: 'POST',
-        mode: 'cors',
+        mode: 'no-cors',
         credentials: 'omit',
         headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
         body: JSON.stringify(payload)
       });
+
+      if (response.type === 'opaque') {
+        statusEl.textContent = 'Thank you! Your RSVP has been received.';
+        if (attendingSelection && attendingSelection.value === 'Yes') {
+          const eventsUrl = new URL('events.html', window.location.href);
+          eventsUrl.searchParams.set('access', access);
+          eventsUrl.searchParams.set('code', code);
+          eventsUrl.searchParams.set('selected', events);
+          window.location.assign(eventsUrl.href);
+          return;
+        }
+        form.reset();
+        document.getElementById('guest-code').value = code;
+        try { updateGuestNamesVisibility(); } catch (e) { /* ignore if function not available */ }
+        return;
+      }
 
       let result = {};
       const text = await response.text();
