@@ -13,97 +13,37 @@
 </head>
 <body>
 
-<div class="twinkle-diyas" aria-hidden="true">
-  <div class="twinkle-inner">
-    <span class="diya">🪔</span>
-    <span class="diya">🪔</span>
-    <span class="diya">🪔</span>
-    <span class="diya">🪔</span>
-    <span class="diya">🪔</span>
-    <span class="diya">🪔</span>
-    <span class="diya">🪔</span>
-  </div>
-</div>
+<header class="site-header">
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation">Menu</button>
+  <a class="mobile-brand" href="index.html" aria-label="Bhavika and Murli home">
+    <span class="footer-initials">B</span><span class="footer-amp">&amp;</span><span class="footer-initials">M</span>
+  </a>
+  <nav class="site-nav" id="site-navigation" aria-label="Main navigation">
+    <a class="site-tab" href="index.html">Home</a>
+    <a class="site-tab" href="index.html#schedule">Wedding Festivities</a>
+    <a class="site-tab" href="index.html"><p class="footer-mark"><span class="footer-initials">B</span><span class="footer-amp">&amp;</span><span class="footer-initials">M</span></p></a>
+    <a class="site-tab" href="story.html">Our Story</a>
+    <a class="site-tab" href="venue.html">Venue</a>
+    <a class="site-tab active" href="RSVP.html" aria-current="page">RSVP</a>
+  </nav>
+</header>
 
-<main class="rsvp-main">
-  <div id="rsvp-access-locked" class="access-locked" hidden>
-    <span class="lock-icon">🔒</span>
-    <p>This RSVP form is shared privately through each guest's personal invite link. Please use the RSVP button on your event details page.</p>
-  </div>
-
-  <div class="arch-card rsvp-card" id="rsvp-card">
-    <img class="crest" src="images/ganesha-crest.png" alt="Ganesha">
-
-    <p class="eyebrow">Kindly respond by October 25, 2026</p>
-    <h1 class="names small">RSVP</h1>
-
-    <form id="rsvp-form" class="rsvp-form">
-      <input type="hidden" id="guest-code" name="guestCode" value="">
-
-      <!-- Honeypot: real visitors never see or fill this. Bots often do. -->
-      <div class="hp-field" aria-hidden="true">
-        <label for="website">Leave this field empty</label>
-        <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+<main class="rsvp">
+  <section class="hero" id="rsvp-access-locked">
+    <div class="arch-card">
+      <img class="crest" src="images/ganesha-crest.png" alt="Ganesha">
+      <p class="footer-mark"><span class="footer-initials">B</span><span class="footer-amp">&amp;</span><span class="footer-initials">M</span></p>
+      <p>This RSVP form is shared privately through each guest's invitation code.</p>
+      <form id="guest-rsvp-form" class="guest-rsvp-form">
+      <label for="guest-access-code">Enter your invitation code</label>
+      <div class="guest-rsvp-controls">
+        <input type="text" id="guest-access-code" name="guestCode" autocomplete="off" placeholder="Invitation code" required>
+        <button type="submit" class="cta cta-outline">Continue to RSVP</button>
       </div>
-
-      <label for="full-name">Full name</label>
-      <input type="text" id="full-name" name="fullName" required placeholder="Pavitra Prabhakar">
-
-      <fieldset class="attend-fieldset">
-        <legend>Will you be attending?</legend>
-        <div class="radio-row">
-          <label class="radio-pill">
-            <input type="radio" name="attending" value="Yes" required>
-            <span>Joyfully Accept</span>
-          </label>
-          <label class="radio-pill">
-            <input type="radio" name="attending" value="No" required>
-            <span>Regretfully Decline</span>
-          </label>
-        </div>
-      </fieldset>
-
-      <label for="guest-count">Number attending (including you)</label>
-      <select id="guest-count" name="guestCount" required>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-      </select>
-
-      <div id="guest-names-wrap" hidden>
-        <p class="label">Names of guests</p>
-        <div id="guest-names-list" class="guest-names-list"></div>
-      </div>
-
-      <label for="events">Which events will you join?</label>
-      <div class="checkbox-col" id="event-options">
-        <label class="checkbox-row" data-tier="all" data-date="nov23"><input type="checkbox" name="events" value="Mehndi"> Mehndi — November 23 | 2:00 PM</label>
-        <label class="checkbox-row" data-tier="all" data-date="nov23"><input type="checkbox" name="events" value="Tilak"> Tilak — November 23 | 3:00 PM</label>
-        <label class="checkbox-row" data-tier="all,ganesh"><input type="checkbox" name="events" value="Ganesh Sthapna & Tel Bukki"> Ganesh Sthapna — November 24 | 8:00 AM</label>
-        <label class="checkbox-row" data-tier="all,ganesh"><input type="checkbox" name="events" value="Ganesh Pooja & Vansh Ropan"> Ganesh Pooja &amp; Vansh Ropan — November 24 | 9:00 AM</label>
-        <label class="checkbox-row" data-tier="all,haldi"><input type="checkbox" name="events" value="Haldi"> Haldi — November 24 | 2:00 PM</label>
-        <label class="checkbox-row" data-tier="all,sangeet,wedding"><input type="checkbox" name="events" value="Sangeet"> Sangeet — November 24 | 6:30 PM</label>
-        <label class="checkbox-row" data-tier="all,sangeet,wedding"><input type="checkbox" name="events" value="Baraat & Wedding Ceremony"> Baraat &amp; Wedding Ceremony — November 25 | 1:00 PM</label>
-      </div>
-
-      <label for="message">Message for the couple (or dedicate a song to us :P )</label>
-      <textarea id="message" name="message" rows="3" placeholder="Leave a note..."></textarea>
-
-      <button type="submit" class="cta submit-btn">Submit</button>
-      <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
+      <p id="guest-rsvp-status" class="form-status" role="status" aria-live="polite"></p>
     </form>
-
-    <div class="ps-note" style="margin-top: 32px; padding-top: 32px; border-top: 1px solid var(--line);">
-      <p><span class="ps-label">P.S.</span> Grace us with your presence. We look forward to celebrating with you!</p>
     </div>
-  </div>
-
-  <div class="event-detail rsvp-venue" id="event-venue">
-    <p class="event-detail-title">Venue</p>
-    <p class="event-detail-when">29314 Twin Oaks Valley Rd, Vista, CA 92081</p>
-    <p class="event-detail-desc"><strong>Parking location:</strong> The Google Maps link below is for parking approximately 250 feet from the venue. Please park there and walk up to the venue.</p>
-    <a class="cta cta-outline venue-map-link" href="https://maps.app.goo.gl/oTehBRXGsejkPRGX6" target="_blank" rel="noopener">Open Parking Location</a>
-  </div>
+  </section>
 </main>
 
 <footer>
