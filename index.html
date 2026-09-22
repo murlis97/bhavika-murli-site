@@ -12,29 +12,32 @@
 <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:wght@500;600;700&family=Karma:wght@400;500;600;700&family=Great+Vibes&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="index-page">
 
-<div class="twinkle-diyas scale-125" aria-hidden="true">
-  <div class="twinkle-inner">
-    <span class="diya">🪔</span>
-    <span class="diya">🪔</span>
-    <span class="diya">🪔</span>
-    <span class="diya">🪔</span>
-    <span class="diya">🪔</span>
-    <span class="diya">🪔</span>
-    <span class="diya">🪔</span>
-  </div>
-</div>
+<header class="site-header">
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation">Menu</button>
+  <a class="mobile-brand" href="index.html" aria-label="Bhavika and Murli home">
+    <span class="footer-initials">B</span><span class="footer-amp">&amp;</span><span class="footer-initials">M</span>
+  </a>
+  <nav class="site-nav" id="site-navigation" aria-label="Main navigation">
+    <a class="site-tab active" href="index.html" aria-current="page">Home</a>
+    <a class="site-tab" href="index.html#schedule">Wedding Festivities</a>
+    <a class="site-tab" href="index.html"><p class="footer-mark"><span class="footer-initials">B</span><span class="footer-amp">&amp;</span><span class="footer-initials">M</span></p></a>
+    <a class="site-tab" href="story.html">Our Story</a>
+    <a class="site-tab" href="venue.html">Venue</a>
+    <a class="site-tab" href="RSVP.html">RSVP</a>
+  </nav>
+</header>
 
 <main>
 
   <section class="hero">
     <div class="arch-card card-invitation enlarge-above">
-      <img class="card-accent top-left" src="images/leaf-icon.png" alt="">
+      <img class="card-accent top-left" src="images/leaf-icon.png"  alt="">
       <img class="card-accent top-right" src="images/leaf-icon.png" alt="">
 
-      <img class="crest" src="images/ganesha-crest.png" alt="Ganesha">
-      <span><p class="dev">॥ शुभ विवाह ॥</p></span>
+      <img class="crest index-crest" src="images/ganesha-crest.png" alt="Ganesha">
+      <p class="index-mantra">ॐ गं गणपतये नमः</p>
       <p class="eyebrow">Together with their families</p>
 
       <h1 class="names">
@@ -60,7 +63,7 @@
 
   <section class="countdown-section">
     <p class="section-eyebrow">Counting down</p>
-    <div id="countdown" class="countdown" data-target="2026-11-25T14:00:00">
+    <div id="countdown" class="countdown" data-target="2026-11-25T13:00:00">
       <div class="count-block"><span class="num" id="cd-days">00</span><span class="label">Days</span></div>
       <div class="count-block"><span class="num" id="cd-hours">00</span><span class="label">Hours</span></div>
       <div class="count-block"><span class="num" id="cd-mins">00</span><span class="label">Minutes</span></div>
@@ -79,40 +82,40 @@
     </div>
   </section>
 
-  <section class="schedule">
+  <section class="schedule" id="schedule">
     <p class="section-eyebrow">The Celebration</p>
     <h2 class="section-title">Schedule of Events <span class="dev">कार्यक्रम की सूची</span></h2>
 
     <ol class="event-list">
-      <li class="event" data-access-all-only hidden>
+      <li class="event">
         <div class="event-mark"></div>
         <div class="event-body">
           <p class="event-name">Mehndi</p>
-          <p class="event-when">Monday, November 23 · 2:00 PM</p>
-          <p class="event-note">A henna application ceremony — come ready to enjoy the festivities.</p>
+          <p class="event-when">Monday, November 23</p>
+          <p class="event-note">A joyful celebration with henna, music, and family.</p>
         </div>
       </li>
-      <li class="event" data-access-all-only hidden>
+      <li class="event">
         <div class="event-mark"></div>
         <div class="event-body">
           <p class="event-name">Tilak</p>
-          <p class="event-when">Monday, November 23 · 3:00 PM</p>
+          <p class="event-when">Monday, November 23</p>
           <p class="event-note">A a vital pre-wedding ritual in Hindu culture where the bride's family officially accepts and blesses the groom.</p>
         </div>
       </li>
-      <li class="event" data-access-all-only hidden>
+      <li class="event">
         <div class="event-mark"></div>
         <div class="event-body">
-          <p class="event-name">Ganesh Sthapna &amp; Tel Ceremony - Bride's side ritual</p>
-          <p class="event-when">Tuesday, November 24 · 8:00 AM</p>
+          <p class="event-name">Ganesh Sthapna &amp; Tel Ceremony</p>
+          <p class="event-when">Tuesday, November 24</p>
           <p class="event-note">A sacred pre-wedding ritual, invoking Lord Ganesha to remove obstacles, bring blessings, and welcome a joyful and auspicious union.</p>
         </div>
       </li>
-      <li class="event" data-access-all-only hidden>
+      <li class="event">
         <div class="event-mark"></div>
         <div class="event-body">
-          <p class="event-name">Ganesh Pooja &amp; Vansh Ropan - Groom's side ritual</p>
-          <p class="event-when">Tuesday, November 24 · 9:00 AM</p>
+          <p class="event-name">Ganesh Pooja &amp; Vansh Ropan</p>
+          <p class="event-when">Tuesday, November 24</p>
           <p class="event-note">A sacred pre-wedding ritual, honoring Lord Ganesha, blessing the family line, and preparing the couple for a joyful and obstacle-free union.</p>
         </div>
       </li>
@@ -120,7 +123,7 @@
         <div class="event-mark"></div>
         <div class="event-body">
           <p class="event-name">Haldi</p>
-          <p class="event-when">Tuesday, November 24 · 2:00 PM</p>
+          <p class="event-when">Tuesday, November 24</p>
           <p class="event-note">A joyful, turmeric-filled tradition — wear clothes you don't mind staining.</p>
         </div>
       </li>
@@ -128,7 +131,7 @@
         <div class="event-mark"></div>
         <div class="event-body">
           <p class="event-name">Sangeet</p>
-          <p class="event-when">Tuesday, November 24 · 6:30 PM</p>
+          <p class="event-when">Tuesday, November 24</p>
           <p class="event-note">A dance party with music and dinner — come ready to celebrate.</p>
         </div>
       </li>
@@ -136,27 +139,24 @@
         <div class="event-mark"></div>
         <div class="event-body">
           <p class="event-name">Baraat &amp; Wedding Ceremony</p>
-          <p class="event-when">Wednesday, November 25 · 1:00 PM</p>
+          <p class="event-when">Wednesday, November 25</p>
           <p class="event-note">Join the baraat procession, followed by the wedding ceremony.</p>
         </div>
       </li>
     </ol>
   </section>
 
-  <section class="travel">
-    <p class="section-eyebrow">Getting There</p>
-    <h2 class="section-title">Venue, Travel &amp; Stay<span class="dev">स्थान और यात्रा</span></h2>
-    <div class="travel-grid">
-      <div class="travel-card">
-        <p class="travel-title">Venue Details</p>
-        <p>Full directions, parking, nearby things to do, and hotel recommendations are all on the venue page.</p>
+  <section class="schedule rsvp-entry-section">
+    <p class="section-eyebrow">Your Invitation</p>
+    <h2 class="section-title">RSVP <span class="dev">उत्तर दें</span></h2>
+    <form id="guest-rsvp-form" class="guest-rsvp-form">
+      <label for="guest-access-code">Enter your invitation code</label>
+      <div class="guest-rsvp-controls">
+        <input type="text" id="guest-access-code" name="guestCode" autocomplete="off" placeholder="Invitation code" required>
+        <button type="submit" class="cta cta-outline">Continue to RSVP</button>
       </div>
-      <div class="travel-card">
-        <p class="travel-title">Attire</p>
-        <p>Festive Indian or formal Western wear. Try to incorporate some traditional elements!</p>
-      </div>
-    </div>
-    <a class="cta cta-outline venue-link" href="venue.html">View Venue &amp; Travel Info</a>
+      <p id="guest-rsvp-status" class="form-status" role="status" aria-live="polite"></p>
+    </form>
   </section>
 
 </main>
