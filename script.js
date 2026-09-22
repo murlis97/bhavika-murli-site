@@ -2,10 +2,7 @@
    1. PASTE YOUR GOOGLE APPS SCRIPT WEB APP URL HERE
    (see README.md for step-by-step setup instructions)
    ========================================================= */
-// old one - used for successfully appending a new entry
-//const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzaHZluIsgOmkNBmPq86nfuG1W643Ln7qHu4O3zjXtl_p__TxFYr1IiANcU-v6cnRpK/exec";
 const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyz3duv0Yodpz9PFKKUdyqD-N4R0ZFMVTQYQl_aJMOIA3VDE_8iu7_WZuS4FdHT6Sra/exec";
-//const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw6IwtYueqdLKDclTTTkfUMynZK8cxuqGcPYPb8TiyET02lNHF1zrVUHpEG2ZXlbK1gMQ/exec";
 
 async function findGuestByCode(rawCode) {
   const code = (rawCode || '').trim().toUpperCase();
