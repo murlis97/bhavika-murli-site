@@ -14,17 +14,20 @@
 </head>
 <body>
 
-<div class="twinkle-diyas" aria-hidden="true">
-  <div class="twinkle-inner">
-    <span class="diya">🪔</span>
-    <span class="diya">🪔</span>
-    <span class="diya">🪔</span>
-    <span class="diya">🪔</span>
-    <span class="diya">🪔</span>
-    <span class="diya">🪔</span>
-    <span class="diya">🪔</span>
-  </div>
-</div>
+<header class="site-header">
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation">Menu</button>
+  <a class="mobile-brand" href="index.html" aria-label="Bhavika and Murli home">
+    <span class="footer-initials">B</span><span class="footer-amp">&amp;</span><span class="footer-initials">M</span>
+  </a>
+  <nav class="site-nav" id="site-navigation" aria-label="Main navigation">
+    <a class="site-tab active" href="index.html" aria-current="page">Home</a>
+    <a class="site-tab" href="index.html#schedule">Wedding Festivities</a>
+    <a class="site-tab" href="index.html"><p class="footer-mark"><span class="footer-initials">B</span><span class="footer-amp">&amp;</span><span class="footer-initials">M</span></p></a>
+    <a class="site-tab" href="story.html">Our Story</a>
+    <a class="site-tab active" href="venue.html">Venue</a>
+    <a class="site-tab" href="RSVP.html">RSVP</a>
+  </nav>
+</header>
 
 <main>
 
@@ -36,41 +39,40 @@
 
       <div class="details">
         <p class="venue"> 📍Vista, CA</p>
-        <p class="venue venue-note">Details to follow on the RSVP link sent separately.</p>
+        <p class="venue venue-note">Details included on the RSVP page and email sent separately.</p>
       </div>
-    </div>
-  </section>
+    
 
   <section class="schedule">
     <p class="section-eyebrow">Directions</p>
     <h2 class="section-title">Getting There &amp; Parking <span class="dev">यात्रा और पार्किंग</span></h2>
 
-    <div class="travel-grid">
+    <div class="travel-grid compact-grid">
       <div class="travel-card">
         <p class="travel-title">By Air</p>
         <ul>
-          <li>San Diego International Airport (SAN) is the closest major airport, about 40 minutes from the venue.</li>
-          <li>Los Angeles International Airport (LAX) is also accessible, approximately 2.5-3 hours from the property.</li>
+          <li>Closest major airport: SAN, about 40 minutes away.</li>
+          <li>LAX is also an option, about 2.5–3 hours away.</li>
         </ul>
       </div>
       <div class="travel-card">
         <p class="travel-title">By Car</p>
         <ul>
-          <li>From I-5, SR-78, or I-15, follow signs toward Vista Ridge Lane.</li>
-          <li>Drive times can vary depending on traffic, so consider both routes. Rideshare (Uber/Lyft) is readily available throughout the area — expect longer wait times during peak event hours.</li>
+          <li>Use I-5, SR-78, or I-15, then follow signs to the venue.</li>
+          <li>Allow extra time for traffic; rideshare is available too.</li>
         </ul>
       </div>
       <div class="travel-card">
         <p class="travel-title">Parking</p>
         <ul>
-          <li>Ample parking is available on the property.</li>
-          <li>For additional parking, please use the overflow lot at <a href="https://maps.app.goo.gl/KHk3M1zWxj5duQGb6" target="_blank" rel="noopener">this location</a> and walk up to the property (approximately 250 feet).</li>
+          <li>On-site parking is available.</li>
+          <li>Overflow lot: <a href="https://maps.app.goo.gl/KHk3M1zWxj5duQGb6" target="_blank" rel="noopener">Click here</a> (about 250 ft walk).</li>
         </ul>
       </div>
     </div>
   </section>
 
-  <section class="travel">
+  <section class="travel" id="travel">
     <p class="section-eyebrow">While You're in Town</p>
     <h2 class="section-title">Things to Do Nearby <span class="dev">आसपास घूमने की जगहें</span></h2>
     <div class="travel-grid">
@@ -116,6 +118,9 @@
         <p>Guests can find a variety of hotel accommodations in Vista, Bonsall, San Marcos, Pala Mesa, and Escondido — all within a reasonable distance from the venue.</p>
       </div>
     </div>
+  </section>
+
+  </div>
   </section>
 
 </main>
