@@ -12,7 +12,6 @@
   --ink:          #46422C;  /* primary body/heading text */
   --ink-soft:     #6B6650;  /* secondary text */
   --sage:         #7C8560;  /* sage accent for dividers */
-  --ember:        #C06B36;  /* diya flame */
 
   --font-display: 'Cormorant Garamond', serif;
   --font-body: 'Poppins', sans-serif;
@@ -26,6 +25,7 @@ html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
+  overflow-x: hidden;
   background: var(--bg);
   background-image:
     radial-gradient(circle at 15% 10%, rgba(169,128,31,0.05), transparent 40%),
@@ -43,61 +43,88 @@ body {
 
 a { color: inherit; }
 
-/* ============================================
-   Twinkling diyas (decorative top strip)
-   ============================================ */
-.twinkle-diyas {
-  /* full-bleed container that anchors an inner strip to the site's max width */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 5;
   width: 100%;
-  display: block;
-  padding: 18px 0 6px;
-  /* space between diyas and the page content/card below */
-  margin-bottom: clamp(12px, 3vw, 40px);
+  padding: 0 20px;
+  background: rgba(243,241,227,0.96);
+  border-bottom: 1px solid rgba(207,201,169,0.7);
+  backdrop-filter: blur(8px);
 }
-
-/* inner strip is constrained to the page max width and aligns with the main/card */
-.twinkle-diyas .twinkle-inner {
+.nav-toggle { display: none; }
+.mobile-brand { display: none; }
+.site-nav {
   display: flex;
+  justify-content: center;
   align-items: center;
-  padding: 0 24px;
-  width: min(100%, var(--max-width));
+  gap: 34px;
+  max-width: var(--max-width);
   margin: 0 auto;
-  gap: clamp(8px, 2.2vw, 40px);
-  justify-content: center; /* default for narrow screens */
+  padding: 0;
 }
-/* Spread diyas more on medium and large viewports */
-@media (min-width: 560px) and (max-width: 979px) {
-  .twinkle-diyas .twinkle-inner { justify-content: space-evenly; gap: clamp(12px, 2.4vw, 48px); padding: 0 16px; }
+.site-tab {
+  position: relative;
+  padding: 18px 0 16px;
+  color: var(--gold-deep);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: color 0.2s ease, background 0.2s ease;
 }
-@media (min-width: 980px) {
-  .twinkle-diyas .twinkle-inner { justify-content: space-between; gap: clamp(16px, 1.8vw, 56px); padding: 0 24px; }
+.site-tab:hover { color: #6f1d2b; }
+.site-tab.active {
+  color: #6f1d2b;
 }
-.twinkle-diyas .diya {
-  font-size: 22px;
-  line-height: 1;
-  opacity: 0.5;
-  filter: drop-shadow(0 0 3px rgba(169,128,31,0.35));
-  animation: twinkle 3.4s ease-in-out infinite;
+.site-tab.active::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 5px;
+  height: 1px;
+  background: currentColor;
 }
-.twinkle-diyas .diya:nth-child(1) { animation-delay: 0s; }
-.twinkle-diyas .diya:nth-child(2) { animation-delay: 0.5s; }
-.twinkle-diyas .diya:nth-child(3) { animation-delay: 1s; }
-.twinkle-diyas .diya:nth-child(4) { animation-delay: 1.5s; }
-.twinkle-diyas .diya:nth-child(5) { animation-delay: 0.8s; }
-.twinkle-diyas .diya:nth-child(6) { animation-delay: 2s; }
-.twinkle-diyas .diya:nth-child(7) { animation-delay: 1.2s; }
-
-@keyframes twinkle {
-  0%, 100% { opacity: 0.35; transform: scale(0.92); }
-  50% { opacity: 1; transform: scale(1.1); }
+.site-tab[href="RSVP.html"] {
+  padding: 18px 22px 16px;
+  background: #2f2c27;
+  color: #FBF9F0;
 }
+.site-tab[href="RSVP.html"]:hover,
+.site-tab.active[href="RSVP.html"] {
+  background: #6f1d2b;
+  color: #FBF9F0;
+}
+.site-tab.active[href="RSVP.html"]::after { background: #FBF9F0; }
 
 /* ============================================
    Hero / Arch card
    ============================================ */
 main { max-width: var(--max-width); margin: 0 auto; padding: 0 24px 60px; }
 
-html { scroll-snap-type: y proximity; }
+.index-page main { max-width: 1200px; }
+.index-page .hero {
+  height: auto;
+  min-height: calc(100svh - 94px);
+  width: calc(100% - 36px);
+  max-width: 1060px;
+  margin: 0 auto;
+  padding: 18px 0 28px;
+}
+.index-page .card-invitation {
+  width: min(100%, 820px);
+  max-width: none;
+  height: auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 
 .hero {
   display: flex;
@@ -106,7 +133,6 @@ html { scroll-snap-type: y proximity; }
   padding-top: 10px;
   padding-bottom: 40px;
   min-height: auto; /* allow the card to size naturally so scaled content isn't clipped */
-  scroll-snap-align: start;
 }
 
 .arch-card {
@@ -157,6 +183,14 @@ html { scroll-snap-type: y proximity; }
   margin-bottom: 18px;
   filter: drop-shadow(0 1px 1px rgba(70,66,44,0.15));
 }
+.arch-card .index-crest { width: 42px; margin-bottom: 2px; }
+.index-mantra {
+  margin: 0 0 22px;
+  color: #6f1d2b;
+  font-family: 'Karma', serif;
+  font-size: 17px;
+  line-height: 1.2;
+}
 
 .eyebrow {
   font-family: var(--font-body);
@@ -164,14 +198,14 @@ html { scroll-snap-type: y proximity; }
   letter-spacing: 4px;
   text-transform: uppercase;
   color: var(--gold-deep);
-  margin: 0 0 28px;
+  margin: 0 0 34px;
 }
 
 .names {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0.35em;
+  gap: 0.55em;
   flex-wrap: nowrap;
   font-family: 'Cormorant Garamond', serif;
   font-weight: 700;
@@ -179,6 +213,14 @@ html { scroll-snap-type: y proximity; }
   line-height: 1.1;
 }
 .names.small { font-size: clamp(34px, 7vw, 46px); letter-spacing: 0.12em; }
+.arch-card .page-dev {
+  margin: 8px 0 0;
+  color: var(--sage);
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-style: italic;
+  letter-spacing: 0.5px;
+}
 .names .name-group {
   display: flex;
   flex-direction: column;
@@ -209,8 +251,9 @@ html { scroll-snap-type: y proximity; }
   font-size: 0.85em;
   letter-spacing: 0;
   color: var(--gold);
-  margin: 0 0.16em;
+  margin: 0 0.22em;
 }
+.card-invitation .names .amp { font-size: 1.1em; }
 
 @media (max-width: 480px) {
   .names {
@@ -239,10 +282,10 @@ html { scroll-snap-type: y proximity; }
   font-style: italic;
   font-size: clamp(14px, 2.2vw, 18px);
   color: var(--ink);
-  margin: 30px 0;
+  margin: 38px 0 26px;
 }
 
-.details { margin: 32px 0 8px; }
+.details { margin: 18px 0 8px; }
 .details .venue { margin: 0 0 6px; font-weight: 400; color: var(--ink); }
 .details .venue-note { margin-top: 12px; font-family: var(--font-display); font-size: 14px; font-style: italic; color: var(--gold-deep); opacity: 0.75; }
 .details .date { margin: 0; color: var(--gold-deep); font-weight: 500; letter-spacing: 0.5px; }
@@ -284,7 +327,7 @@ html { scroll-snap-type: y proximity; }
 /* Larger padding variant for the invitation card to simulate a 1.25× visual increase
    without using transforms (so document flow grows and following content isn't overlapped) */
 .arch-card.card-invitation.enlarge-above {
-  padding: calc(1.25 * clamp(28px, 4.5vw, 56px)) calc(1.25 * clamp(18px, 3.5vw, 36px)) calc(1.25 * clamp(20px, 4vw, 44px));
+  padding: clamp(42px, 5vw, 58px) clamp(24px, 3.5vw, 38px) clamp(36px, 4.5vw, 50px);
 }
 
 /* ============================================
@@ -354,12 +397,18 @@ html { scroll-snap-type: y proximity; }
   align-items: center;
   gap: 24px;
 }
+
+.guest-rsvp-form { max-width: 520px; margin: 0 auto; text-align: left; }
+.guest-rsvp-form label { display: block; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold-deep); margin-bottom: 6px; }
+.guest-rsvp-controls { display: flex; gap: 12px; align-items: stretch; }
+.guest-rsvp-controls input { flex: 1; min-width: 0; padding: 12px 14px; background: #FBF9F0; border: 1px solid var(--line); border-radius: 10px; font: inherit; color: var(--ink); }
+.guest-rsvp-controls .cta { margin-top: 0; white-space: nowrap; padding-left: 20px; padding-right: 20px; }
 .story-photo {
   width: 100%;
   max-width: 340px;
-  aspect-ratio: 4 / 5;
   border-radius: 20px;
   overflow: hidden;
+  background: var(--panel);
 }
 .story-teaser p.story-copy { max-width: 480px; margin: 0 auto; font-size: 15px; color: var(--ink-soft); }
 
@@ -381,10 +430,12 @@ html { scroll-snap-type: y proximity; }
 }
 .photo-placeholder .icon { font-size: 28px; opacity: 0.6; }
 .story-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
   display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  background: var(--panel);
+  border-radius: inherit;
 }
 
 /* ============================================
@@ -440,12 +491,25 @@ html { scroll-snap-type: y proximity; }
   gap: 20px;
   text-align: left;
 }
+.compact-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
 .travel-card {
   background: var(--panel);
   border: 1px solid var(--line);
   border-radius: 18px;
-  padding: 24px;
+  padding: 20px 18px;
 }
+.travel-card ul {
+  margin: 0;
+  padding-left: 18px;
+}
+.travel-card li {
+  margin: 0 0 8px;
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+.travel-card li:last-child { margin-bottom: 0; }
 .travel-title {
   font-family: var(--font-display);
   font-size: 19px;
@@ -455,6 +519,12 @@ html { scroll-snap-type: y proximity; }
 }
 .travel-card .hotel-address { margin: 0; font-size: 14px; color: var(--ink-soft); }
 .travel-card p:last-child { margin: 0; font-size: 14px; color: var(--ink-soft); }
+
+@media (max-width: 820px) {
+  .compact-grid {
+    grid-template-columns: 1fr;
+  }
+}
 
 .venue-link { display: block; margin: 28px auto 0; width: fit-content; }
 
@@ -552,6 +622,7 @@ footer {
 .rsvp-form label:first-of-type { margin-top: 0; }
 
 .rsvp-form input[type="text"],
+.rsvp-form input[type="email"],
 .rsvp-form select,
 .rsvp-form textarea {
   width: 100%;
@@ -570,6 +641,7 @@ footer {
   opacity: 1; /* ensure consistent placeholder visibility across browsers */
 }
 .rsvp-form input[type="text"]:focus,
+.rsvp-form input[type="email"]:focus,
 .rsvp-form select:focus,
 .rsvp-form textarea:focus {
   outline: none;
@@ -614,6 +686,19 @@ footer {
 .checkbox-row { display: flex; align-items: center; gap: 10px; font-size: 14px; text-transform: none; letter-spacing: 0; color: var(--ink); }
 .checkbox-row[hidden] { display: none; }
 .checkbox-row input { accent-color: var(--gold); width: 16px; height: 16px; }
+.select-all-row {
+  font-weight: 500;
+  color: var(--gold-deep);
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 2px;
+}
+.event-access-note {
+  margin: 0 0 12px;
+  color: var(--gold-deep);
+  font-size: 14px;
+  line-height: 1.5;
+}
 
 .submit-btn { width: 100%; margin-top: 30px; border: none; cursor: pointer; }
 
@@ -656,38 +741,49 @@ footer {
 
 .story-gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: 1fr;
   gap: 14px;
   margin: 36px 0 8px;
 }
-.story-gallery .story-photo { aspect-ratio: unset; max-width: none; height: 100%; overflow: hidden; }
-
-/* Larger screens: force a 4-column collage and vary photo spans for an unequal, side-by-side layout */
-@media (min-width: 980px) {
-  .story-gallery {
-    grid-template-columns: repeat(4, 1fr);
-    grid-auto-rows: 280px; /* base row height (double previous base) */
-    gap: 16px;
-  }
-  .story-gallery .story-photo { height: 100%; }
-  /* Collage arrangement (adjust spans to create unequal sizes) */
-  .story-gallery .story-photo:nth-child(1) { grid-column: 1 / span 2; grid-row: 1 / span 2; }
-  .story-gallery .story-photo:nth-child(2) { grid-column: 3 / span 2; grid-row: 1 / span 1; }
-  .story-gallery .story-photo:nth-child(3) { grid-column: 3 / span 1; grid-row: 2 / span 1; }
-  .story-gallery .story-photo:nth-child(4) { grid-column: 4 / span 1; grid-row: 2 / span 1; }
+.story-gallery .story-photo {
+  max-width: none;
+  height: auto;
+  overflow: hidden;
+  border-radius: 22px;
+  background: var(--panel);
 }
 
-/* Ensure images fill their grid cells */
+@media (min-width: 980px) {
+  .story-gallery {
+    gap: 16px;
+  }
+  .story-gallery .story-photo {
+    border-radius: 22px;
+  }
+}
+
+/* Ensure images fill their grid cells without odd cropping */
 .story-gallery .story-photo .story-image,
 .story-gallery .story-photo .photo-placeholder {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   display: block;
 }
 
 .story-chapters { margin-top: 20px; }
+.story-instagram { margin: 28px 0 4px; text-align: center; }
+.story-instagram .cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 0;
+  max-width: 100%;
+}
+.instagram-icon { width: 18px; height: 18px; flex: 0 0 auto; }
 .story-chapter {
+  position: relative;
   display: grid;
   grid-template-columns: 1fr;
   gap: 20px;
@@ -696,10 +792,36 @@ footer {
   border-top: 1px solid var(--line);
 }
 .story-chapter:first-child { border-top: none; }
+.story-chapter-date {
+  position: absolute;
+  right: calc(100% + 62px);
+  top: 50%;
+  color: var(--gold-deep);
+  font-family: var(--font-display);
+  font-size: 21px;
+  letter-spacing: 1px;
+  line-height: 1;
+  white-space: nowrap;
+  writing-mode: vertical-rl;
+  transform: translateY(-50%) rotate(180deg);
+}
 @media (min-width: 620px) {
   .story-chapter { grid-template-columns: 1fr 1.2fr; text-align: left; }
   .story-chapter.reverse { grid-template-columns: 1.2fr 1fr; }
   .story-chapter.reverse .story-photo { order: 2; }
+}
+@media (max-width: 619px) {
+  .story-chapter-date {
+    position: static;
+    display: block;
+    margin: 0 0 14px;
+    font-size: 19.5px;
+    letter-spacing: 0.8px;
+    text-align: left;
+    white-space: normal;
+    writing-mode: horizontal-tb;
+    transform: none;
+  }
 }
 
 /* Timeline images: preserve original aspect ratio, avoid cropping, and limit height
@@ -710,19 +832,16 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 20px; /* consistent rounded corners */
-  overflow: hidden; /* keep rounded corners visually consistent */
+  border-radius: 20px;
+  overflow: hidden;
   width: 100%;
-  max-width: 420px; /* limit photo width so tall images can shrink instead of being cropped */
-  max-height: 360px; /* prevent photos from matching long text height */
+  max-width: 420px;
   background: var(--panel);
 }
 .story-chapter .story-photo .story-image,
 .story-chapter .story-photo .photo-placeholder {
-  width: auto;           /* allow width to shrink to preserve aspect ratio */
-  max-width: 100%;
+  width: 100%;
   height: auto;
-  max-height: 360px;    /* constrain height without cropping */
   object-fit: contain;
   display: block;
 }
@@ -787,10 +906,185 @@ footer {
 /* ============================================
    Responsive
    ============================================ */
-@media (max-width: 560px) {
-  .arch-card { padding: 32px 18px 28px; border-radius: 160px 160px 20px 20px; }
+@media (max-width: 900px) {
+  body {
+    padding-left: 0;
+    padding-top: 58px;
+  }
+  .index-page .hero {
+    height: auto;
+    min-height: auto;
+    width: 100%;
+    margin-left: 0;
+    padding: 18px 0 8px;
+  }
+  .index-page main { padding: 0 14px 40px; }
+  .site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 20;
+    width: 100%;
+    height: 58px;
+    padding: 0;
+    background: rgba(243,241,227,0.98);
+    border-right: 0;
+    border-bottom: 1px solid rgba(207,201,169,0.7);
+    pointer-events: auto;
+  }
+  .site-header::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    background: rgba(45,28,22,0.35);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+  }
+  .site-header.is-open::after { opacity: 1; pointer-events: auto; }
+  .nav-toggle {
+    display: block;
+    position: fixed;
+    top: 14px;
+    left: 14px;
+    z-index: 30;
+    width: 44px;
+    height: 40px;
+    padding: 0;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    background: var(--panel);
+    color: transparent;
+    font-size: 0;
+    cursor: pointer;
+    pointer-events: auto;
+  }
+  .mobile-brand {
+    display: block;
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    z-index: 31;
+    transform: translateX(-50%);
+    color: #6f1d2b;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 30px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    line-height: 42px;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .mobile-brand .footer-amp {
+    font-size: 0.9em;
+  }
+  .nav-toggle::before,
+  .nav-toggle::after {
+    content: '';
+    position: absolute;
+    left: 11px;
+    width: 20px;
+    height: 2px;
+    background: var(--gold-deep);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .nav-toggle::before {
+    top: 13px;
+    box-shadow: 0 6px 0 var(--gold-deep), 0 12px 0 var(--gold-deep);
+  }
+  .site-header.is-open .nav-toggle::before {
+    top: 19px;
+    transform: rotate(45deg);
+    box-shadow: none;
+  }
+  .site-header.is-open .nav-toggle::after {
+    top: 19px;
+    transform: rotate(-45deg);
+  }
+  .site-nav {
+    position: fixed;
+    top: 58px;
+    left: 0;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 8px;
+    width: min(82vw, 300px);
+    height: calc(100dvh - 58px);
+    max-height: none;
+    padding: 20px 16px;
+    background: rgba(243,241,227,0.98);
+    border-right: 1px solid rgba(207,201,169,0.7);
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+    overflow-y: auto;
+    pointer-events: auto;
+  }
+  .site-header.is-open .site-nav {
+    transform: translateX(0);
+  }
+  .site-tab {
+    flex: 0 0 auto;
+    width: 100%;
+    padding: 12px 10px;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-align: left;
+  }
+  .site-nav .site-tab:has(.footer-mark) {
+    display: none;
+  }
+  .site-tab.active::after {
+    top: 8px;
+    right: 5px;
+    bottom: 8px;
+    left: auto;
+    width: 2px;
+    height: auto;
+  }
+  .site-tab[href="RSVP.html"] { padding: 12px 10px; }
+  .arch-card {
+    padding: 28px 16px 24px;
+    border-radius: 120px 120px 18px 18px;
+  }
+  .index-page .card-invitation {
+    padding: 28px 18px 24px;
+    border-radius: 18px;
+  }
+  .index-page .card-invitation.enlarge-above {
+    padding: 34px 18px 32px;
+  }
+  .names {
+    flex-direction: column;
+    gap: 0.28rem;
+  }
+  .names .amp {
+    display: block;
+    margin: 0.12rem 0;
+  }
+  .names .name {
+    font-size: clamp(30px, 8vw, 42px);
+    letter-spacing: 0.08em;
+  }
+  .names .name-details {
+    font-size: clamp(11px, 3.2vw, 13px);
+    line-height: 1.3;
+    margin-top: 2px;
+  }
+  .tagline {
+    margin: 18px 0;
+    font-size: clamp(15px, 4.8vw, 18px);
+  }
+  .details { margin-top: 18px; }
+  .details .venue,
+  .details .date {
+    font-size: 14px;
+  }
   .rsvp-card { border-radius: 140px 140px 20px 20px; }
   .countdown { gap: 10px; }
   .count-block { min-width: 68px; padding: 14px 10px; }
   .count-block .num { font-size: 26px; }
+  .guest-rsvp-controls { flex-direction: column; }
+  .guest-rsvp-controls .cta { width: 100%; }
 }
