@@ -2,6 +2,7 @@
    1. PASTE YOUR GOOGLE APPS SCRIPT WEB APP URL HERE
    (see README.md for step-by-step setup instructions)
    ========================================================= */
+// old one - used for successfully appending a new entry
 const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyz3duv0Yodpz9PFKKUdyqD-N4R0ZFMVTQYQl_aJMOIA3VDE_8iu7_WZuS4FdHT6Sra/exec";
 
 async function findGuestByCode(rawCode) {
@@ -517,10 +518,7 @@ initGuestRedirectFromCsv();
         method: 'POST',
         mode: 'cors',
         credentials: 'omit',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
+        headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
         body: JSON.stringify(payload)
       });
 
