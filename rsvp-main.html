@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self'; connect-src 'self' https://script.google.com https://script.googleusercontent.com; img-src 'self'; frame-ancestors 'none';">
+<title>RSVP · Bhavika & Murli Wedding</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:wght@500;600;700&family=Great+Vibes&family=Noto+Serif+Devanagari:wght@400;500;600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation">Menu</button>
+  <a class="mobile-brand" href="index.html" aria-label="Bhavika and Murli home">
+    <span class="footer-initials">B</span><span class="footer-amp">&amp;</span><span class="footer-initials">M</span>
+  </a>
+  <nav class="site-nav" id="site-navigation" aria-label="Main navigation">
+    <a class="site-tab" href="index.html">Home</a>
+    <a class="site-tab" href="index.html#schedule">Wedding Festivities</a>
+    <a class="site-tab" href="index.html"><p class="footer-mark"><span class="footer-initials">B</span><span class="footer-amp">&amp;</span><span class="footer-initials">M</span></p></a>
+    <a class="site-tab" href="story.html">Our Story</a>
+    <a class="site-tab" href="venue.html">Venue</a>
+    <a class="site-tab active" href="RSVP.html" aria-current="page">RSVP</a>
+  </nav>
+</header>
+
+<main class="rsvp-main">
+
+  <div class="arch-card rsvp-card" id="rsvp-card" hidden>
+    <img class="crest" src="images/ganesha-crest.png" alt="Ganesha">
+    <!-- <p class="footer-mark"><span class="footer-initials">B</span><span class="footer-amp">&amp;</span><span class="footer-initials">M</span></p> -->
+
+    <p class="eyebrow">Kindly respond by <strong>October 20, 2026</strong></p>
+    <h1 class="names small">RSVP</h1>
+
+    <form id="rsvp-form" class="rsvp-form">
+      <input type="hidden" id="guest-code" name="guestCode" value="">
+
+      <!-- Honeypot: real visitors never see or fill this. Bots often do. -->
+      <div class="hp-field" aria-hidden="true">
+        <label for="website">Leave this field empty</label>
+        <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+      </div>
+
+      <label for="full-name">Full name</label>
+      <input type="text" id="full-name" name="fullName" required placeholder="Pavitra Prabhakar">
+
+      <label for="email">Email address</label>
+      <input type="email" id="email" name="email" required autocomplete="email" placeholder="you@example.com">
+
+      <fieldset class="attend-fieldset">
+        <legend>Will you be attending?</legend>
+        <div class="radio-row">
+          <label class="radio-pill">
+            <input type="radio" name="attending" value="Yes" required>
+            <span>Joyfully Accept</span>
+          </label>
+          <label class="radio-pill">
+            <input type="radio" name="attending" value="No" required>
+            <span>Regretfully Decline</span>
+          </label>
+        </div>
+      </fieldset>
+
+      <label for="guest-count">Number attending (including you)</label>
+      <select id="guest-count" name="guestCount" required>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+      </select>
+
+      <div id="guest-names-wrap" hidden>
+        <p class="label">Names of guests</p>
+        <div id="guest-names-list" class="guest-names-list"></div>
+      </div>
+
+      <label for="events">Which events will you join?</label>
+      <p class="event-access-note" id="event-access-note" hidden>We would love for you to stay with us for the celebrations and share this joyful time together.</p>
+      <div class="checkbox-col" id="event-options">
+        <label class="checkbox-row select-all-row">
+          <input type="checkbox" id="select-all-events" aria-label="Select all available events">
+          <span>Select all</span>
+        </label>
+        <label class="checkbox-row" data-tier="stay,mehndi"><input type="checkbox" name="events" value="Mehndi"> Mehndi — November 23 | 2:00 PM</label>
+        <label class="checkbox-row" data-tier="stay,mehndi"><input type="checkbox" name="events" value="Tilak"> Tilak — November 23 | 3:00 PM</label>
+        <label class="checkbox-row" data-tier="stay"><input type="checkbox" name="events" value="Ganesh Sthapna & Tel Bukki"> Ganesh Sthapna — November 24 | 8:00 AM</label>
+        <label class="checkbox-row" data-tier="stay"><input type="checkbox" name="events" value="Ganesh Pooja & Vansh Ropan"> Ganesh Pooja &amp; Vansh Ropan — November 24 | 9:00 AM</label>
+        <label class="checkbox-row" data-tier="stay,mehndi,haldi"><input type="checkbox" name="events" value="Haldi"> Haldi — November 24 | 2:00 PM</label>
+        <label class="checkbox-row" data-tier="stay,mehndi,haldi,sangeet"><input type="checkbox" name="events" value="Sangeet"> Sangeet — November 24 | 6:30 PM</label>
+        <label class="checkbox-row" data-tier="stay,mehndi,haldi,sangeet,wedding"><input type="checkbox" name="events" value="Baraat & Wedding Ceremony"> Baraat &amp; Wedding Ceremony — November 25 | 1:00 PM</label>
+      </div>
+
+      <label for="message">Message for the couple (or dedicate a song to us :P )</label>
+      <textarea id="message" name="message" rows="3" placeholder="Leave a note..."></textarea>
+
+      <button type="submit" class="cta submit-btn">Submit</button>
+      <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
+    </form>
+
+    <div class="ps-note" style="margin-top: 32px; padding-top: 32px; border-top: 1px solid var(--line);">
+      <p><span class="ps-label">P.S.</span> Grace us with your presence. We look forward to celebrating with you!</p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <p class="footer-mark"><span class="footer-initials">B</span><span class="footer-amp">&amp;</span><span class="footer-initials">M</span></p>
+  <div class="footer-meta">
+    <p class="footer-date">Wednesday, November 25, 2026</p>
+    <p class="footer-location">Vista, CA</p>
+  </div>
+  <img class="footer-om" src="images/om-icon.png" alt="Om symbol">
+  <p class="footer-links"><a href="index.html">Invitation</a> &middot; <a href="story.html">Our Story</a> &middot; <a href="venue.html">Venue &amp; Travel</a></p>
+  <p class="footer-credit">Made by Murli for Bhavika with ❤️</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
